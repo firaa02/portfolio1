@@ -186,21 +186,22 @@ const Homepage: React.FC = () => {
             Leveraging modern technologies and best practices to create exceptional digital experiences.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {skills.map((skill, index) => (
-              <div 
-                key={index}
-                className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10"
-              >
-                <div className="text-blue-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                  {skill.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-4 group-hover:text-blue-400 transition-colors">
-                  {skill.name}
-                </h3>
-                <p className="text-gray-400 leading-relaxed">
-                  {skill.description}
-                </p>
-              </div>
+          {skills.map((skill, index) => (
+  <div 
+    key={index}
+    className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10"
+  >
+    <div className="text-blue-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
+      {skill.icon}
+    </div>
+    <h3 className="text-xl font-bold mb-4 group-hover:text-blue-400 transition-colors">
+      {skill.name}
+    </h3>
+    <p className="text-gray-400 leading-relaxed">
+      {skill.description}
+    </p>
+  </div>
+
             ))}
           </div>
         </div>

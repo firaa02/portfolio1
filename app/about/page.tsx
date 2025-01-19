@@ -3,7 +3,9 @@
 import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
-import { Github, Linkedin, Mail, Terminal, Code, Globe, BookOpen, Briefcase, GraduationCap, Award } from 'lucide-react';
+
+import { Code, BookOpen, GraduationCap } from 'lucide-react';
+
 
 interface Experience {
   title: string;
@@ -135,7 +137,7 @@ const AboutPage: React.FC = () => {
   <div className="rounded-full overflow-hidden w-80 h-80 mx-auto border-4 border-blue-500/30">
   <Image
   src="/images/profile.jpg"
-  alt="Alfira"
+  alt="Foto Profil Alfira"
   width={320} // Pastikan menambahkan lebar
   height={320} // dan tinggi untuk gambar
   className="w-full h-full object-cover"
