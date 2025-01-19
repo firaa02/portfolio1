@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
 import { Github, Linkedin, Mail, Terminal, Code, Globe, BookOpen, Briefcase, GraduationCap, Award } from 'lucide-react';
@@ -132,11 +133,13 @@ const AboutPage: React.FC = () => {
           <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/3">
   <div className="rounded-full overflow-hidden w-80 h-80 mx-auto border-4 border-blue-500/30">
-    <img 
-      src="/images/profile.jpg"
-      alt="Alfira"
-      className="w-full h-full object-cover"
-    />
+  <Image
+  src="/images/profile.jpg"
+  alt="Alfira"
+  width={320} // Pastikan menambahkan lebar
+  height={320} // dan tinggi untuk gambar
+  className="w-full h-full object-cover"
+/>
   </div>
 </div>
             <div className="lg:w-2/3">
@@ -209,7 +212,7 @@ const AboutPage: React.FC = () => {
       {/* Footer */}
       <footer className="py-10 text-center text-gray-400">
         <div className="container mx-auto px-6">
-          <p className="text-lg">&copy; 2025 Alfira. All rights reserved.</p>
+        <p className="text-lg">&copy; 2025 Alfira. All rights reserved.</p>
         </div>
       </footer>
     </main>
