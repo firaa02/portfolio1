@@ -165,19 +165,38 @@ const AboutPage = () => {
     const sectionId = item.toLowerCase();
     const isActive = activeSection === sectionId;
 
+    if (item === 'About') {
+      return (
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <button
+            onClick={() => scrollToSection('hero')}
+            className={`relative py-2 ${
+              isActive ? 'text-blue-400' : 'text-gray-300 hover:text-white'
+            } transition-colors duration-300 after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-blue-400 after:transition-all hover:after:w-full`}
+          >
+            {item}
+          </button>
+        </motion.div>
+      );
+    }
+
     return (
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <button
-          onClick={() => scrollToSection(sectionId)}
+        <Link
+          href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
           className={`relative py-2 ${
-            isActive ? 'text-blue-400' : 'text-gray-300 hover:text-white'
+            item === 'About' ? 'text-blue-400' : 'text-gray-300 hover:text-white'
           } transition-colors duration-300 after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-blue-400 after:transition-all hover:after:w-full`}
+          onClick={() => setIsMenuOpen(false)}
         >
           {item}
-        </button>
+        </Link>
       </motion.div>
     );
   };
