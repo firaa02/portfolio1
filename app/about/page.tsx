@@ -153,22 +153,34 @@ const AboutPage = () => {
     }
   };
 
-  const NavLink = ({ item }: { item: string }) => (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      <Link
-        href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-        className={`relative py-2 ${
-          item === 'About' ? 'text-blue-400' : 'text-gray-300 hover:text-white'
-        } transition-colors duration-300 after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-blue-400 after:transition-all hover:after:w-full`}
-        onClick={() => setIsMenuOpen(false)}
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
+  const NavLink = ({ item }: { item: string }) => {
+    const sectionId = item.toLowerCase();
+    const isActive = activeSection === sectionId;
+
+    return (
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
       >
-        {item}
-      </Link>
-    </motion.div>
-  );
+        <button
+          onClick={() => scrollToSection(sectionId)}
+          className={`relative py-2 ${
+            isActive ? 'text-blue-400' : 'text-gray-300 hover:text-white'
+          } transition-colors duration-300 after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-blue-400 after:transition-all hover:after:w-full`}
+        >
+          {item}
+        </button>
+      </motion.div>
+    );
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
