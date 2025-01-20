@@ -259,17 +259,42 @@ const AboutPage = () => {
         </div>
       </motion.nav>
 
-      {/* About Hero Section */}
-      <motion.section
-        id="hero"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="pt-32 pb-20"
-      >
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
+      {/* About Header */}
+<motion.section
+  id="hero"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  variants={containerVariants}
+  className="pt-32 pb-12"
+>
+  <div className="container mx-auto px-6">
+    <motion.h1
+      variants={itemVariants}
+      className="text-5xl lg:text-6xl font-bold text-center mb-8 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"
+    >
+      About Me
+    </motion.h1>
+    <motion.p
+      variants={itemVariants}
+      className="text-xl text-gray-300 text-center max-w-3xl mx-auto leading-relaxed mb-16"
+    >
+      A passionate Software Engineering student specializing in frontend development
+      and modern web technologies.
+    </motion.p>
+  </div>
+</motion.section>
+
+{/* About Content Section */}
+<motion.section
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  variants={containerVariants}
+  className="py-12"
+>
+  <div className="container mx-auto px-6">
+    <div className="flex flex-col lg:flex-row items-center gap-16">
             <motion.div
               className="lg:w-1/3"
               variants={itemVariants}
