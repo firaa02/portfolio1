@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Github, ExternalLink, Search, Code, Layout, Database, Smartphone, Globe, Menu, X } from 'lucide-react';
@@ -191,11 +192,13 @@ const ProjectsPage: React.FC = () => {
               >
                 {/* Project Image */}
                 <div className="relative h-56 overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                  />
+                <Image
+  src={project.image}
+  alt={project.title}
+  width={500}  // Tentukan lebar yang sesuai
+  height={500} // Tentukan tinggi yang sesuai
+  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+/>
                   {/* Overlay with Links */}
                   <div className="absolute inset-0 bg-gray-900/80 opacity-0 group-hover:opacity-100 transition-all duration-300">
                     <div className="absolute inset-0 flex items-center justify-center gap-6">

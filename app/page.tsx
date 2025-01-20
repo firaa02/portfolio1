@@ -129,7 +129,7 @@ const Homepage: React.FC = () => {
               </div>
               <h1 className="text-5xl lg:text-7xl font-bold mb-8">
                 <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-                  Hello, I'm Alfira
+                I&apos;m Alfira.
                 </span>
                 <br />
                 <span className="mt-4 block text-4xl lg:text-6xl">

@@ -6,7 +6,6 @@ import Link from 'next/link';
 
 import { Code, BookOpen, GraduationCap } from 'lucide-react';
 
-
 interface Experience {
   title: string;
   company: string;
@@ -133,17 +132,17 @@ const AboutPage: React.FC = () => {
       <section className="pt-32 pb-20">
         <div className="container mx-auto px-6">
           <div className="flex flex-col lg:flex-row items-center gap-16">
-          <div className="lg:w-1/3">
-  <div className="rounded-full overflow-hidden w-80 h-80 mx-auto border-4 border-blue-500/30">
-  <Image
-  src="/images/profile.jpg"
-  alt="Foto Profil Alfira"
-  width={320} // Pastikan menambahkan lebar
-  height={320} // dan tinggi untuk gambar
-  className="w-full h-full object-cover"
-/>
-  </div>
-</div>
+            <div className="lg:w-1/3">
+              <div className="rounded-full overflow-hidden w-80 h-80 mx-auto border-4 border-blue-500/30">
+                <Image
+                  src="/images/profile.jpg"
+                  alt="Foto Profil Alfira"
+                  width={320}
+                  height={320}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
             <div className="lg:w-2/3">
               <h1 className="text-4xl lg:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
                 Alfira
@@ -210,11 +209,22 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Skills Section */}
+      <section className="py-20 bg-gray-900">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold mb-12">Skills</h2>
+          <ul>
+            {skills.map((skill, index) => (
+              <li key={index} className="text-gray-300">{skill}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="py-10 text-center text-gray-400">
         <div className="container mx-auto px-6">
-        <p className="text-lg">&copy; 2025 Alfira. All rights reserved.</p>
+          <p className="text-lg">&copy; 2025 Alfira. All rights reserved.</p>
         </div>
       </footer>
     </main>
