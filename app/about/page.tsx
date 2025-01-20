@@ -177,7 +177,7 @@ const AboutPage = () => {
                 <div className="w-80 h-80 rounded-full overflow-hidden border-4 border-blue-500/30 mx-auto group">
                   <div className="absolute inset-0 bg-gradient-to-b from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <Image
-                    src="/api/placeholder/500/500"
+                    src="/images/profile.jpg"
                     alt="Foto Profil Alfira"
                     width={500}
                     height={500}
