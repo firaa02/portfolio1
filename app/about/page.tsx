@@ -171,6 +171,20 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Skills Section */}
+      <section className="py-20 bg-gray-800/50">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold mb-12 text-blue-400">Skills</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {skills.map((skill, index) => (
+              <div key={index} className="bg-gray-800/50 rounded-xl p-4 text-center">
+                <span className="text-xl font-semibold text-blue-400">{skill}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Experience Section */}
       <section className="py-20 bg-gray-800/50">
         <div className="container mx-auto px-6">
@@ -213,13 +227,10 @@ const AboutPage: React.FC = () => {
           <div className="space-y-8 mt-12">
             {semesterDetails.map((sem, index) => (
               <div key={index} className="bg-gray-800/50 rounded-xl p-8 hover:bg-gray-800 transition-colors">
-                <h3 className="text-xl font-bold text-blue-400 mb-4">{sem.semester}</h3>
-                <ul className="grid gap-3">
+                <h3 className="text-xl font-bold text-blue-400">{sem.semester}</h3>
+                <ul className="mt-4">
                   {sem.activities.map((activity, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <span className="text-blue-400 mt-1">•</span>
-                      <span className="text-gray-300">{activity}</span>
-                    </li>
+                    <li key={i} className="text-gray-300">• {activity}</li>
                   ))}
                 </ul>
               </div>
@@ -227,13 +238,6 @@ const AboutPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-10 text-center text-gray-400">
-        <div className="container mx-auto px-6">
-          <p className="text-lg">&copy; 2025 Alfira. All rights reserved.</p>
-        </div>
-      </footer>
     </main>
   );
 };
