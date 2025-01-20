@@ -189,9 +189,6 @@ const Homepage = () => {
           <div className={`flex flex-col lg:flex-row items-center justify-between gap-16 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
             <div className="lg:w-1/2 text-center lg:text-left">
               <div className="mb-6 inline-block animate-bounce">
-                <span className="px-4 py-2 bg-blue-500/10 text-blue-400 rounded-full text-sm">
-                  Available for hire
-                </span>
               </div>
               <h1 className="text-5xl lg:text-7xl font-bold mb-8">
                 <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-purple-500 bg-clip-text text-transparent inline-block transform hover:scale-105 transition-transform duration-500">
@@ -228,7 +225,7 @@ const Homepage = () => {
                 <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-blue-500/30 mx-auto relative group transform hover:rotate-6 transition-all duration-700">
                   <div className="absolute inset-0 bg-gradient-to-b from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <Image 
-                    src="/api/placeholder/500/500" 
+                    src="/images/profile.jpg" 
                     alt="Alfira" 
                     width={500} 
                     height={500} 
