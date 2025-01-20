@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Code, BookOpen, GraduationCap, Menu, X, ChevronRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface Experience {
   title: string;
@@ -153,6 +153,18 @@ const AboutPage = () => {
     }
   };
 
+  const navVariants = {
+    hidden: { y: -100 },
+    visible: {
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 20
+      }
+    }
+  };
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -205,12 +217,12 @@ const AboutPage = () => {
     <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
       {/* Navigation */}
       <motion.nav
-        initial={false}
-        animate={{
-          backgroundColor: isScrolled ? 'rgba(17, 24, 39, 0.9)' : 'transparent',
-          backdropFilter: isScrolled ? 'blur(12px)' : 'blur(0px)'
-        }}
-        className="fixed w-full z-50 border-b border-gray-800"
+        initial="hidden"
+        animate="visible"
+        variants={navVariants}
+        className={`fixed w-full z-50 transition-all duration-300 ${
+          isScrolled ? 'bg-gray-900/90 backdrop-blur-lg shadow-lg' : 'bg-transparent'
+        } border-b border-gray-800`}
       >
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
@@ -242,61 +254,63 @@ const AboutPage = () => {
           </div>
 
           {/* Mobile Menu */}
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="md:hidden absolute top-full left-0 right-0 bg-gray-900/90 backdrop-blur-lg border-b border-gray-800 py-4"
-            >
-              <div className="flex flex-col space-y-4 px-6">
-                {navItems.map((item) => (
-                  <NavLink key={item} item={item} />
-                ))}
-              </div>
-            </motion.div>
-          )}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.2 }}
+                className="md:hidden absolute top-full left-0 right-0 bg-gray-900/90 backdrop-blur-lg border-b border-gray-800 py-4"
+              >
+                <div className="flex flex-col space-y-4 px-6">
+                  {navItems.map((item) => (
+                    <NavLink key={item} item={item} />
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </motion.nav>
 
       {/* About Header */}
-<motion.section
-  id="hero"
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
-  variants={containerVariants}
-  className="pt-32 pb-12"
->
-  <div className="container mx-auto px-6">
-    <motion.h1
-      variants={itemVariants}
-      className="text-5xl lg:text-6xl font-bold text-center mb-8 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"
-    >
-      About Me
-    </motion.h1>
-    <motion.p
-      variants={itemVariants}
-      className="text-xl text-gray-300 text-center max-w-3xl mx-auto leading-relaxed mb-16"
-    >
-      A passionate Software Engineering student specializing in frontend development
-      and modern web technologies.
-    </motion.p>
-  </div>
-</motion.section>
+      <motion.section
+        id="hero"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className="pt-32 pb-12"
+      >
+        <div className="container mx-auto px-6">
+          <motion.h1
+            variants={itemVariants}
+            className="text-5xl lg:text-6xl font-bold text-center mb-8 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"
+          >
+            About Me
+          </motion.h1>
+          <motion.p
+            variants={itemVariants}
+            className="text-xl text-gray-300 text-center max-w-3xl mx-auto leading-relaxed"
+          >
+            A passionate Software Engineering student specializing in frontend development
+            and modern web technologies.
+          </motion.p>
+        </div>
+      </motion.section>
 
-{/* About Content Section */}
-<motion.section
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
-  variants={containerVariants}
-  className="py-12"
->
-  <div className="container mx-auto px-6">
-    <div className="flex flex-col lg:flex-row items-center gap-16">
+      {/* About Overview Section */}
+      <motion.section
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className="py-12 border-t border-b border-gray-800/50"
+      >
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col lg:flex-row items-start gap-16">
+            {/* Profile Photo Column */}
             <motion.div
-              className="lg:w-1/3"
+              className="lg:w-1/3 lg:sticky lg:top-32"
               variants={itemVariants}
             >
               <motion.div
@@ -332,59 +346,86 @@ const AboutPage = () => {
                   }}
                 />
               </motion.div>
+
+              {/* Name and Title */}
+              <motion.div className="text-center mt-8">
+                <motion.h2
+                  variants={itemVariants}
+                  className="text-3xl font-bold mb-2"
+                >
+                  <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    Alfira
+                  </span>
+                </motion.h2>
+                <motion.p
+                  variants={itemVariants}
+                  className="text-gray-400"
+                >
+                  Frontend Developer
+                </motion.p>
+              </motion.div>
             </motion.div>
 
+            {/* Details Column */}
             <motion.div
-              className="lg:w-2/3"
+              className="lg:w-2/3 space-y-8"
               variants={containerVariants}
             >
-              <motion.h1
-                variants={itemVariants}
-                className="text-4xl lg:text-5xl font-bold mb-6"
-              >
-                <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                  Alfira
-                </span>
-              </motion.h1>
+              {/* Personal Information */}
               <motion.div
-                variants={containerVariants}
-                className="space-y-4 text-xl text-gray-300 mb-8"
+                variants={itemVariants}
+                className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
               >
-                <motion.p variants={itemVariants}>
-                  <span className="font-semibold text-blue-400">NIM:</span> 2215051053
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  <span className="font-semibold text-blue-400">Asal:</span> Medan
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  <span className="font-semibold text-blue-400">Tanggal Lahir:</span> 02 Mei 2002
-                </motion.p>
-                <motion.p variants={itemVariants} className="mt-6">
+                <h3 className="text-2xl font-bold text-blue-400 mb-6">Personal Information</h3>
+                <div className="space-y-4 text-xl">
+                  <motion.p variants={itemVariants} className="flex items-center">
+                    <span className="font-semibold text-blue-400 w-32">NIM:</span>
+                    <span className="text-gray-300">2215051053</span>
+                  </motion.p>
+                  <motion.p variants={itemVariants} className="flex items-center">
+                    <span className="font-semibold text-blue-400 w-32">Asal:</span>
+                    <span className="text-gray-300">Medan</span>
+                  </motion.p>
+                  <motion.p variants={itemVariants} className="flex items-center">
+                    <span className="font-semibold text-blue-400 w-32">Tanggal Lahir:</span>
+                    <span className="text-gray-300">02 Mei 2002</span>
+                  </motion.p>
+                </div>
+              </motion.div>
+
+              {/* Professional Summary */}
+              <motion.div
+                variants={itemVariants}
+                className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
+              >
+                <h3 className="text-2xl font-bold text-blue-400 mb-6">About Me</h3>
+                <motion.p variants={itemVariants} className="text-gray-300 text-lg leading-relaxed">
                   Mahasiswa Teknik Informatika yang passionate dalam pengembangan web dan teknologi modern.
                   Fokus pada frontend development dengan keahlian dalam React dan Next.js.
                 </motion.p>
-              </motion.div>
-              <motion.div
-                variants={containerVariants}
-                className="flex flex-wrap gap-4"
-              >
+                {/* Skill Tags */}
                 <motion.div
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
+                  variants={containerVariants}
+                  className="flex flex-wrap gap-4 mt-6"
                 >
-                  <Code size={20} className="text-blue-400" />
-                  <span>Frontend Development</span>
-                </motion.div>
-                <motion.div
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
-                >
-                  <BookOpen size={20} className="text-blue-400" />
-                  <span>Continuous Learning</span>
+                  <motion.div
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
+                  >
+                    <Code size={20} className="text-blue-400" />
+                    <span>Frontend Development</span>
+                  </motion.div>
+                  <motion.div
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-2 bg-gray-800/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
+                  >
+                    <BookOpen size={20} className="text-blue-400" />
+                    <span>Continuous Learning</span>
+                  </motion.div>
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -399,7 +440,7 @@ const AboutPage = () => {
         whileInView="visible"
         viewport={{ once: true }}
         variants={containerVariants}
-        className="py-24 bg-gray-800/30 backdrop-blur-sm border-t border-b border-gray-800"
+        className="py-24 bg-gray-800/30 backdrop-blur-sm border-b border-gray-800"
       >
         <div className="container mx-auto px-6">
           <motion.h2
@@ -442,7 +483,7 @@ const AboutPage = () => {
         whileInView="visible"
         viewport={{ once: true }}
         variants={containerVariants}
-        className="py-24"
+        className="py-24 border-b border-gray-800"
       >
         <div className="container mx-auto px-6">
           <motion.h2
@@ -498,7 +539,7 @@ const AboutPage = () => {
         whileInView="visible"
         viewport={{ once: true }}
         variants={containerVariants}
-        className="py-24 bg-gray-800/30 backdrop-blur-sm border-t border-gray-800"
+        className="py-24 bg-gray-800/30 backdrop-blur-sm"
       >
         <div className="container mx-auto px-6">
           <motion.h2
@@ -565,6 +606,31 @@ const AboutPage = () => {
           </motion.div>
         </div>
       </motion.section>
+
+      {/* Back to Top Button */}
+      <motion.button
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isScrolled ? 1 : 0 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="fixed bottom-8 right-8 bg-blue-500 p-3 rounded-full shadow-lg shadow-blue-500/25 text-white z-50"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 10l7-7m0 0l7 7m-7-7v18"
+          />
+        </svg>
+      </motion.button>
     </main>
   );
 };
