@@ -23,10 +23,8 @@ interface Project {
 const Homepage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -369,7 +367,7 @@ const Homepage = () => {
           <motion.div
             variants={containerVariants}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {skills.map((skill, index) => (
+{skills.map((skill, index) => (
               <motion.div 
                 key={index}
                 variants={itemVariants}
