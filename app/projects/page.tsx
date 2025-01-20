@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Github, ExternalLink, Search, Code, Layout, Database, Smartphone, Globe, Menu, X } from 'lucide-react';
+import { Github, ExternalLink, Search, Layout, Database, Smartphone, Globe, Menu, X } from 'lucide-react';
 
 interface Project {
   id: number;
@@ -92,9 +92,7 @@ const ProjectsPage: React.FC = () => {
                 <Link
                   key={item}
                   href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                  className={`relative py-2 ${
-                    item === 'Projects' ? 'text-blue-400' : 'text-gray-300 hover:text-white'
-                  } transition-colors duration-300 after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-blue-400 after:transition-all hover:after:w-full`}
+                  className={`relative py-2 ${item === 'Projects' ? 'text-blue-400' : 'text-gray-300 hover:text-white'} transition-colors duration-300 after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-blue-400 after:transition-all hover:after:w-full`}
                 >
                   {item}
                 </Link>
@@ -192,57 +190,44 @@ const ProjectsPage: React.FC = () => {
               >
                 {/* Project Image */}
                 <div className="relative h-56 overflow-hidden">
-                <Image
-  src={project.image}
-  alt={project.title}
-  width={500}  // Tentukan lebar yang sesuai
-  height={500} // Tentukan tinggi yang sesuai
-  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-/>
-                  {/* Overlay with Links */}
-                  <div className="absolute inset-0 bg-gray-900/80 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <div className="absolute inset-0 flex items-center justify-center gap-6">
-                      {project.githubUrl && (
-                        <a 
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-4 bg-gray-800/80 rounded-full hover:bg-gray-700 transition-colors transform hover:scale-110 duration-300"
-                        >
-                          <Github size={24} />
-                        </a>
-                      )}
-                      {project.liveUrl && (
-                        <a 
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-4 bg-gray-800/80 rounded-full hover:bg-gray-700 transition-colors transform hover:scale-110 duration-300"
-                        >
-                          <ExternalLink size={24} />
-                        </a>
-                      )}
-                    </div>
-                  </div>
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={500}  // Tentukan lebar yang sesuai
+                    height={500} // Tentukan tinggi yang sesuai
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition-all"
+                  />
                 </div>
-
-                {/* Project Info */}
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-300 mb-6 leading-relaxed">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, index) => (
-                      <span 
-                        key={index}
-                        className="px-4 py-2 bg-gray-700/50 backdrop-blur-sm rounded-lg text-sm text-blue-400 border border-gray-600"
+                
+                {/* Project Details */}
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold text-white">{project.title}</h3>
+                  <p className="mt-2 text-gray-300">{project.description}</p>
+                  
+                  {/* Tags */}
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="bg-gray-700 px-3 py-1 rounded-full text-sm text-gray-300"
                       >
                         {tag}
                       </span>
                     ))}
+                  </div>
+
+                  {/* GitHub and Live Links */}
+                  <div className="absolute bottom-4 right-4 flex gap-4 opacity-0 group-hover:opacity-100 transition-all">
+                    {project.githubUrl && (
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                        <Github size={24} className="text-gray-300 hover:text-blue-400" />
+                      </a>
+                    )}
+                    {project.liveUrl && (
+                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink size={24} className="text-gray-300 hover:text-blue-400" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -250,13 +235,6 @@ const ProjectsPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-12 text-center text-gray-400 border-t border-gray-800">
-        <div className="container mx-auto px-6">
-          <p className="text-lg">&copy; 2025 Alfira. All rights reserved.</p>
-        </div>
-      </footer>
     </main>
   );
 };

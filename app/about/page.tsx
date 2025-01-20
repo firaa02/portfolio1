@@ -171,15 +171,33 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Education Section dengan Timeline Semester */}
+      {/* Experience Section */}
       <section className="py-20 bg-gray-800/50">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-12 flex items-center gap-4">
-            <GraduationCap className="text-blue-400" />
+          <h2 className="text-3xl font-bold mb-12 text-blue-400">Experience</h2>
+          <div className="space-y-8">
+            {experiences.map((exp, index) => (
+              <div key={index} className="bg-gray-800/50 rounded-xl p-8 hover:bg-gray-800 transition-colors">
+                <h3 className="text-xl font-bold text-blue-400">{exp.title}</h3>
+                <p className="text-gray-300">{exp.company} - {exp.period}</p>
+                <ul className="mt-4">
+                  {exp.description.map((desc, i) => (
+                    <li key={i} className="text-gray-300">• {desc}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section className="py-20 bg-gray-800/50">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold mb-12 text-blue-400">
+            <GraduationCap className="inline mr-2 text-blue-400" />
             Education
           </h2>
-          
-          {/* Main Education Card */}
           <div className="bg-gray-800 rounded-xl p-8 mb-12">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-4">
               <div>
@@ -188,6 +206,7 @@ const AboutPage: React.FC = () => {
               </div>
               <p className="text-gray-400">2022 - Present</p>
             </div>
+            <p className="text-gray-300">{education[0].description}</p>
           </div>
 
           {/* Semester Timeline */}
@@ -206,18 +225,6 @@ const AboutPage: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section className="py-20 bg-gray-900">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-12">Skills</h2>
-          <ul>
-            {skills.map((skill, index) => (
-              <li key={index} className="text-gray-300">{skill}</li>
-            ))}
-          </ul>
         </div>
       </section>
 
